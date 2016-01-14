@@ -50,7 +50,7 @@ if __name__ == "__main__":
 	
 	Y = np.asarray(listOfSentiments)
 	
-	count_vect = CountVectorizer()
+	count_vect = CountVectorizer(ngram_range = (1,3), max_features = 3250)
 	X_train_counts = count_vect.fit_transform(listOfReviews)
 
 	
@@ -58,26 +58,27 @@ if __name__ == "__main__":
 	X_train_tfidf = tfidf_transformer.fit_transform(X_train_counts)
 	X = X_train_tfidf.toarray()
 
+	
 	print "GaussianNB training started..."
-	clf0 = GaussianNB().fit(X[:int(float(len(listOfReviews)) * 0.9)], Y[:int(float(len(listOfSentiments)) * 0.9)])
-	print "Prediction accuracy score by GaussianNB: ", clf0.score(X[int(float(len(listOfReviews)) * 0.9):], Y[int(float(len(listOfSentiments)) * 0.9):])
+	clf4 = GaussianNB().fit(X[:int(float(len(listOfReviews)) * 0.9)], Y[:int(float(len(listOfSentiments)) * 0.9)])
+	print "Prediction accuracy score by GaussianNB: ", clf4.score(X[int(float(len(listOfReviews)) * 0.9):], Y[int(float(len(listOfSentiments)) * 0.9):])
 
 	print "MultinomialNB training started..."
-	clf1 = MultinomialNB().fit(X[:int(float(len(listOfReviews)) * 0.9)], Y[:int(float(len(listOfSentiments)) * 0.9)])
-	print "Prediction accuracy score by MultinomialNB: ", clf1.score(X[int(float(len(listOfReviews)) * 0.9):], Y[int(float(len(listOfSentiments)) * 0.9):])
-
+	clf4 = MultinomialNB().fit(X[:int(float(len(listOfReviews)) * 0.9)], Y[:int(float(len(listOfSentiments)) * 0.9)])
+	print "Prediction accuracy score by MultinomialNB: ", clf4.score(X[int(float(len(listOfReviews)) * 0.9):], Y[int(float(len(listOfSentiments)) * 0.9):])
+	
 	print "BernoulliNB training started..."
-	clf2 = BernoulliNB().fit(X[:int(float(len(listOfReviews)) * 0.9)], Y[:int(float(len(listOfSentiments)) * 0.9)])
-	print "Prediction accuracy score by BernoulliNB: ", clf2.score(X[int(float(len(listOfReviews)) * 0.9):], Y[int(float(len(listOfSentiments)) * 0.9):])
-
+	clf4 = BernoulliNB().fit(X[:int(float(len(listOfReviews)) * 0.9)], Y[:int(float(len(listOfSentiments)) * 0.9)])
+	print "Prediction accuracy score by BernoulliNB: ", clf4.score(X[int(float(len(listOfReviews)) * 0.9):], Y[int(float(len(listOfSentiments)) * 0.9):])
+	'''
 	print "SVC training started..."
-	clf3 = SVC().fit(X[:int(float(len(listOfReviews)) * 0.9)], Y[:int(float(len(listOfSentiments)) * 0.9)])
-	print "Prediction accuracy score by SVC: ", clf3.score(X[int(float(len(listOfReviews)) * 0.9):], Y[int(float(len(listOfSentiments)) * 0.9):])
-
+	clf4 = SVC().fit(X[:int(float(len(listOfReviews)) * 0.9)], Y[:int(float(len(listOfSentiments)) * 0.9)])
+	print "Prediction accuracy score by SVC: ", clf4.score(X[int(float(len(listOfReviews)) * 0.9):], Y[int(float(len(listOfSentiments)) * 0.9):])
+	'''
 	print "LinearSVC training started..."
 	clf4 = LinearSVC().fit(X[:int(float(len(listOfReviews)) * 0.9)], Y[:int(float(len(listOfSentiments)) * 0.9)])
 	print "Prediction accuracy score by LinearSVC: ", clf4.score(X[int(float(len(listOfReviews)) * 0.9):], Y[int(float(len(listOfSentiments)) * 0.9):])
-
+	
 	print "DecisionTreeClassifier training started..."
 	clf5 = DecisionTreeClassifier(min_samples_split = 40).fit(X[:int(float(len(listOfReviews)) * 0.9)], Y[:int(float(len(listOfSentiments)) * 0.9)])
 	print "Prediction accuracy score by DecisionTreeClassifier: ", clf5.score(X[int(float(len(listOfReviews)) * 0.9):], Y[int(float(len(listOfSentiments)) * 0.9):])
@@ -89,3 +90,4 @@ if __name__ == "__main__":
 	print "AdaBoostClassifier training started..."
 	clf7 = AdaBoostClassifier().fit(X[:int(float(len(listOfReviews)) * 0.9)], Y[:int(float(len(listOfSentiments)) * 0.9)])
 	print "Prediction accuracy score by AdaBoostClassifier: ", clf7.score(X[int(float(len(listOfReviews)) * 0.9):], Y[int(float(len(listOfSentiments)) * 0.9):])
+	
